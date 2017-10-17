@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: 
+  pool: 5
+
+development:
+  <<: *default
+  database: mymess_development
+
+test:
+  <<: *default
+  database: mymess_test
+
+production:
+  <<: *default
+  database: mymess_production
+  username: mymess
+  password: <%= ENV['MYMESS_DATABASE_PASSWORD'] %>
