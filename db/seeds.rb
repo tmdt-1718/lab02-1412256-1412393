@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Message.delete_all
+
+(1..10).each do |blog_num|
+    Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: 1)
+end

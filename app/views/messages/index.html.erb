@@ -1,0 +1,8 @@
+<%= render partial: 'flash_message', locals: {messages: flash} %>
+<h1>Messages</h1>
+<%= @messages.count %> messages  
+
+
+<% @messages.reverse_each do |message| %>
+	<%= render partial: "thumbnail", locals: {a: message}%>
+<% end %>	
