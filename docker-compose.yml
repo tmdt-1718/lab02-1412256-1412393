@@ -15,9 +15,9 @@ services:
     tty: true
   db:
     image: postgres
-    container_name: db
+    container_name: db_1
 
   redis:
     image: redis
-    container_name: redis
+    container_name: redis_1
 
