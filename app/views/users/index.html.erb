@@ -1,8 +1,8 @@
-<% @users.each do |user| %>
-    <% if user.username != current_user.username %>
-        <%=h user.username %>
-        <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
-      <% end %>
-    
-    
- <% end %>
+<%= render partial: 'flash_message', locals: {messages: flash} %>
+<h1>Users</h1>
+  <%= @users.count %> users
+
+
+  <% @users.reverse_each do |user| %>
+  	<%= render partial: "thumbnail", locals: {a: user}%>
+<% end %>	

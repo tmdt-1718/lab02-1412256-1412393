@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/sessions/login', to: 'sessions#create', as: nil
   delete '/sessions/logout', to: 'sessions#destroy', as: :logout
   resources :messages, only: [:index, :show, :new, :create, :update, :destroy]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:index, :show, :new, :create]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
