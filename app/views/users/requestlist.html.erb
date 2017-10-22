@@ -1,0 +1,22 @@
+<%= render partial: 'flash_message', locals: {messages: flash} %>
+<h1>Users</h1>
+Tatal: <%= link_to users_path do %><%= @users.count %> users <% end %>
+| <%= link_to friendlist_path do %>	Your friends	<% end %>
+| <%= link_to requestlist_path do %>	Friend request	<% end %>
+
+
+  <% @cur_user.accepttingfriends.reverse_each do |a| %>
+    <div class="message-thumbnail">
+      <div class="card-body">
+          <div class="col-md-10">
+            <h4 class="card-title">
+              <%= link_to user_path(a.friend_id), class: "card-title" do %>
+                <%= a.friend_email %>
+              <% end %>
+              </h4>
+            <h6 class="card-subtitle mb-2 text-muted">Name: <%= a.friend_name %></h6>
+          </div>
+      </div>
+    </div>
+
+  <% end %>

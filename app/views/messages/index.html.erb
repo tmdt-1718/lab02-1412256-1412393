@@ -1,8 +1,12 @@
 <%= render partial: 'flash_message', locals: {messages: flash} %>
+
+<a href="#" class="btn btn-success">Added</a>
+<a href="#" class="btn btn-primary">Added</a>
+<a href="/users" class="btn btn-info">All users</a>
 <h1>Messages</h1>
-<%= @messages.count %> messages  
+<%= @messages.count %> messages
 
 
 <% @messages.reverse_each do |message| %>
 	<%= render partial: "thumbnail", locals: {a: message}%>
-<% end %>	
+<% end %>

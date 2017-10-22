@@ -5,6 +5,41 @@
   <div class="card-body">
     <h4 class="card-title"><%= @user.name %></h4>
     <p class="card-text"><%= @user.email %></p>
-    <a href="#" class="btn btn-primary">Add friend</a>
+		<% if @friend %>
+          	<a href="#" class="btn btn-primary">Sent message</a>
+      <% else %>
+              <% if @accept %>
+                          <%= form_for :post, url: '/users/acceptfriend' do |f| %>
+                            <br></br>
+                            <div class="form-group">
+                              <input type='hidden' name="post[friend_id]" id="post_friend_id" value="<%= @user.id %>">
+                              <input type='hidden' name="post[friend_name]" id="post_friend_mame" value="<%=  @user.name %>">
+                              <input type='hidden' name="post[friend_email]" id="post_friend_email" value="<%=  @user.email %>">
+                            </div>
+
+                            <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Accept</button>
+                            </div>
+                            <% end %>
+                      <% else %>
+                            <% if @add %>
+                                    <a href="#" class="btn btn-primary">Added</a>
+                            <% else %>
+                                    <%= form_for :post, url: '/users/addfriend' do |f| %>
+                                      <br></br>
+                                      <div class="form-group">
+                                            <input type='hidden' name="post[friend_id]" id="post_friend_id" value="<%= @user.id %>">
+                                            <input type='hidden' name="post[friend_name]" id="post_friend_mame" value="<%=  @user.name %>">
+                                            <input type='hidden' name="post[friend_email]" id="post_friend_email" value="<%=  @user.email %>">
+                                      </div>
+
+                                      <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Add friend</button>
+                                      </div>
+
+                          <% end %>                    
+                <% end %>
+              <%end%>
+    <% end %>
   </div>
 </div>

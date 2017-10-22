@@ -1,6 +1,11 @@
 class User < ApplicationRecord
     has_many :messages
     has_many :receivers
+    has_many :friendships
+    has_many :friendrequests
+    has_many :addingfriends
+    has_many :accepttingfriends
+
 	  has_secure_password
 
     def self.authenticate!(session_params)
