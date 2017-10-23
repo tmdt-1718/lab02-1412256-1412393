@@ -10,6 +10,19 @@
     }
 }
 
+.message-thumbnail2 {
+    @extend .card !optional;
+    background-color: LightGray ;
+    margin-bottom: 10px;
+    .card-text {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left: 10px;
+    }
+}
+
 .message-highlight {
     background-color: yellow;
 }

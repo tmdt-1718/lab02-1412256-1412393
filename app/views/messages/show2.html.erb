@@ -4,7 +4,7 @@
 	<div class="card-body">
 			<div class="col-md-10">
 				<h4 class="card-title">
-					<%= link_to show_path(@message.id), class: "card-title" do %>
+					<%= link_to show2_path(@message.id), class: "card-title" do %>
 						<%= @message.title %>
 					<% end %>
 					</h4>
@@ -16,7 +16,7 @@
 					<%= @message.body %>
 				</p>
 				<h6 class="card-subtitle mb-2 text-muted">(Seen at: <%= @message.seen_at %>)</h6>
-				<%= link_to messages_path, class: 'btn btn-secondary' do %>
+				<%= link_to sentmessage_path, class: 'btn btn-secondary' do %>
 					Back
 				<% end %>
 			</div>

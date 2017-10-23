@@ -1,6 +1,5 @@
 class User < ApplicationRecord
     has_many :messages
-    has_many :receivers
     has_many :friendships
     has_many :friendrequests
     has_many :addingfriends

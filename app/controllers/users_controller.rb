@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate, only: [:index, :show, :friendlist, :requestlist, :addfriend, :acceptfriend]
   before_action :get_user, only: [:show]
-
+  add_breadcrumb "MyMess", "/messages"
     def new
         add_breadcrumb "Register", new_user_path
     end
@@ -32,6 +32,10 @@ class UsersController < ApplicationController
         add_breadcrumb "Users", users_path
         add_breadcrumb @user.name, user_path(@user.id)
         @cur_user = User.find_by(id: session[:current_user_id])
+        @check=true;
+        if (@cur_user.id == @user.id)
+          @check=false
+        end
         @friend = @cur_user.friendships.find_by(friend_email: @user.email)
         @add = @cur_user.addingfriends.find_by(friend_email: @user.email)
         @accept = @cur_user.accepttingfriends.find_by(friend_email: @user.email)
@@ -45,6 +49,7 @@ class UsersController < ApplicationController
     def friendlist
         @cur_user = User.find_by(id: session[:current_user_id])
         @users=User.all
+        @users = @users.order('created_at ASC')
         #@friendlist=@cur_user.friendships
         #@users = Array.new(100, User)
         #@users.push(@cur_user)
@@ -57,6 +62,7 @@ class UsersController < ApplicationController
 
       @cur_user = User.find_by(id: session[:current_user_id])
       @users=User.all
+      @users = @users.order('created_at ASC')
       #@friendlist=@cur_user.friendships
       #@users = Array.new(100, User)
       #@users.push(@cur_user)

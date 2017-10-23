@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
     def new
 		add_breadcrumb "Login", login_path
 	end

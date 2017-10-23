@@ -50,13 +50,7 @@ ActiveRecord::Schema.define(version: 20171022212610) do
     t.datetime "updated_at", null: false
     t.boolean "seen"
     t.datetime "seen_at"
-  end
-
-  create_table "receivers", force: :cascade do |t|
-    t.integer "message_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "receiver"
   end
 
   create_table "users", force: :cascade do |t|
