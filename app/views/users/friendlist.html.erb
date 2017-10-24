@@ -1,9 +1,8 @@
 <%= render partial: 'flash_message', locals: {messages: flash} %>
-<h1>Users</h1>
-Tatal: <%= link_to users_path do %><%= @users.count %> users <% end %>
-| <%= link_to friendlist_path do %>	Your friends	<% end %>
+<h1>Friend list</h1>
+<%= link_to friendlist_path do %>	Your friends	<% end %>
 | <%= link_to requestlist_path do %>	Friend request	<% end %>
-
+| <%= link_to users_path do %> All users (<%= @users.count %> users) <% end %>
 
   <% @cur_user.friendships.reverse_each do |a| %>
     <div class="message-thumbnail">

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate, only: [:index, :show, :friendlist, :requestlist, :addfriend, :acceptfriend]
+  before_action :authenticate, only: [:index, :show, :friendlist, :requestlist, :addfriend, :acceptfriend, :unfriend]
   before_action :get_user, only: [:show]
   add_breadcrumb "MyMess", "/messages"
     def new
@@ -94,6 +94,18 @@ class UsersController < ApplicationController
               @friend2= Friendship.new(user_id: params[:post][:friend_id], friend_id:   @cur_user.id, friend_name:   @cur_user.name, friend_email:   @cur_user.email )
                 if @friend2.save
                   flash[:success] = "Accept successfully."
+                  redirect_to user_path(params[:post][:friend_id])
+                end
+          end
+    end
+
+    def unfriend
+        @unf1 = Friendship.find_by(user_id: params[:post][:friend_id], friend_id: session[:current_user_id])
+        @unf2 = Friendship.find_by(user_id: session[:current_user_id], friend_id: params[:post][:friend_id])
+
+          if @unf1.destroy
+                if @unf2.destroy
+                  flash[:success] = "Unfriend successfully."
                   redirect_to user_path(params[:post][:friend_id])
                 end
           end

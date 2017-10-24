@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post '/users/unfriend', to: 'users#unfriend'
   get '/messages/inbox/:id', to: 'messages#show', as: :show
   get '/messages/entmessages/:id', to: 'messages#show2', as: :show2
   get '/messages/sentmessages', to: 'messages#sentmessage', as: :sentmessage
