@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate, only: [:index, :show, :friendlist, :requestlist, :addfriend, :acceptfriend, :unfriend]
+  before_action :authenticate, only: [:index, :show, :friendlist, :requestlist, :addfriend, :acceptfriend, :unfriend, :block, :unblock]
   before_action :get_user, only: [:show]
   add_breadcrumb "MyMess", "/messages"
     def new
@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 
     def index
         @users=User.all
+        @users = @users.order('name DESC')
+        @cur_user = User.find_by(id: session[:current_user_id])
         add_breadcrumb "Users", users_path
     end
 
@@ -36,23 +38,22 @@ class UsersController < ApplicationController
         if (@cur_user.id == @user.id)
           @check=false
         end
+        @check2=false;
         @friend = @cur_user.friendships.find_by(friend_email: @user.email)
+        if (@friend)
+          if (@friend.block == true)
+            @check2=true;
+          end
+        end
         @add = @cur_user.addingfriends.find_by(friend_email: @user.email)
         @accept = @cur_user.accepttingfriends.find_by(friend_email: @user.email)
-        #@user.view=1
-        #@user.save
-        # @user = User.find(params[:id])
-        #@user.update(view: @user.view+1)
-        #@user.save
+
     end
 
     def friendlist
         @cur_user = User.find_by(id: session[:current_user_id])
         @users=User.all
         @users = @users.order('created_at ASC')
-        #@friendlist=@cur_user.friendships
-        #@users = Array.new(100, User)
-        #@users.push(@cur_user)
         add_breadcrumb "Users", users_path
         add_breadcrumb "Friends", friendlist_path
 
@@ -63,9 +64,6 @@ class UsersController < ApplicationController
       @cur_user = User.find_by(id: session[:current_user_id])
       @users=User.all
       @users = @users.order('created_at ASC')
-      #@friendlist=@cur_user.friendships
-      #@users = Array.new(100, User)
-      #@users.push(@cur_user)
       add_breadcrumb "Users", users_path
       add_breadcrumb "Friends request", requestlist_path
     end
@@ -89,9 +87,9 @@ class UsersController < ApplicationController
         @accept = Accepttingfriend.find_by(user_id: session[:current_user_id], friend_id: params[:post][:friend_id])
         @accept.destroy!
         @cur_user = User.find_by(id: session[:current_user_id])
-        @friend1 = Friendship.new(user_id: session[:current_user_id], friend_id: params[:post][:friend_id], friend_name: params[:post][:friend_name], friend_email: params[:post][:friend_email] )
+        @friend1 = Friendship.new(user_id: session[:current_user_id], friend_id: params[:post][:friend_id], friend_name: params[:post][:friend_name], friend_email: params[:post][:friend_email], block: false )
           if @friend1.save
-              @friend2= Friendship.new(user_id: params[:post][:friend_id], friend_id:   @cur_user.id, friend_name:   @cur_user.name, friend_email:   @cur_user.email )
+              @friend2= Friendship.new(user_id: params[:post][:friend_id], friend_id:   @cur_user.id, friend_name:   @cur_user.name, friend_email:   @cur_user.email, block: false )
                 if @friend2.save
                   flash[:success] = "Accept successfully."
                   redirect_to user_path(params[:post][:friend_id])
@@ -109,6 +107,30 @@ class UsersController < ApplicationController
                   redirect_to user_path(params[:post][:friend_id])
                 end
           end
+    end
+
+
+    def block
+        @cur_user = User.find_by(id: session[:current_user_id])
+        @user = User.find_by(id: params[:post][:friend_id])
+        @friend = @cur_user.friendships.find_by(friend_id: @user.id)
+        @friend.update(block: true);
+        if @friend.save
+          flash[:success] = "Block successfully."
+          redirect_to user_path(params[:post][:friend_id])
+        end
+    end
+
+
+    def unblock
+        @cur_user = User.find_by(id: session[:current_user_id])
+        @user = User.find_by(id: params[:post][:friend_id])
+        @friend = @cur_user.friendships.find_by(friend_id: @user.id)
+        @friend.update(block: false);
+        if @friend.save
+          flash[:success] = "Unblock successfully."
+          redirect_to user_path(params[:post][:friend_id])
+        end
     end
     private
 

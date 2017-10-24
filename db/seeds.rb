@@ -13,18 +13,8 @@ Accepttingfriend.delete_all
 
 user1 = User.create!(name: "Phong", email:'phong@gmail.com', password: '123')
 user2 = User.create!(name: "Khoa", email:'khoa@gmail.com', password: '123')
-user3 = User.create!(name: "hihi", email:'hihi@gmail.com', password: '123')
+user3 = User.create!(name: "Hihi", email:'hihi@gmail.com', password: '123')
+user3 = User.create!(name: "Hoho", email:'hoho@gmail.com', password: '123')
 
-Friendship.create!(user_id: user1.id, friend_id: user2.id, friend_name:user2.name, friend_email: user2.email)
-Friendship.create!(user_id: user2.id, friend_id: user1.id, friend_name:user1.name, friend_email: user1.email)
-
-mess1= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess2= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess3= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess4= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess5= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess6= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess7= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess8= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess9= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
-mess10= Message.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(10), user_id: user2.id, receiver: user1.id, seen: false)
+Friendship.create!(user_id: user1.id, friend_id: user2.id, friend_name:user2.name, friend_email: user2.email, block: false)
+Friendship.create!(user_id: user2.id, friend_id: user1.id, friend_name:user1.name, friend_email: user1.email, block: false)

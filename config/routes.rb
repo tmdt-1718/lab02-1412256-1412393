@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  post '/users/unfriend', to: 'users#unfriend'
+
   get '/messages/inbox/:id', to: 'messages#show', as: :show
-  get '/messages/entmessages/:id', to: 'messages#show2', as: :show2
+  get '/messages/sentmessages/:id', to: 'messages#show2', as: :show2
   get '/messages/sentmessages', to: 'messages#sentmessage', as: :sentmessage
   get '/', to: 'messages#index'
   get '/users/friendlist', to: 'users#friendlist', as: :friendlist
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :new, :create]
   post '/users/addfriend', to: 'users#addfriend'
   post '/users/acceptfriend', to: 'users#acceptfriend'
-
+  post '/users/unfriend', to: 'users#unfriend'
+  post '/users/block', to: 'users#block'
+  post '/users/unblock', to: 'users#unblock'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
     def new
         add_breadcrumb "New message", new_message_path
         @cur_user = User.find_by(id: session[:current_user_id])
+        @friends = Friendship.where(:user_id => session[:current_user_id], :block => false)
     end
 
     def show
@@ -35,19 +36,21 @@ class MessagesController < ApplicationController
 
     def show2
         add_breadcrumb "Sent messages", "/messages/sentmessages"
-        add_breadcrumb @message.title, show_path(@message.id)
+        add_breadcrumb @message.title, show2_path(@message.id)
         # @message = Message.find(params[:id])
         #@message.update(view: @message.view+1)
         #@message.save
     end
 
     def create
-      @message = Message.new(title: params[:post][:title],  body: params[:post][:body], user_id: session[:current_user_id], receiver: params[:post][:friend_id], seen: false)
-      if @message.save
-         flash[:success] = "Send successfully."
-         redirect_to sentmessage_path
+      if (!params[:post][:title].strip.empty? && !params[:post][:body].strip.empty? && params[:post][:friend_id])
+        @message = Message.new(title: params[:post][:title],  body: params[:post][:body], user_id: session[:current_user_id], receiver: params[:post][:friend_id], seen: false)
+        if @message.save
+           flash[:success] = "Send successfully."
+           redirect_to sentmessage_path
+        end
       end
-     end
+    end
 
     private
     def get_message
