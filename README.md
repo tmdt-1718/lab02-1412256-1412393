@@ -3,8 +3,8 @@
 **MyMess** là một bài tập môn TMDT. Ứng dụng cho phép người dùng gửi tin nhắn (email) cho người dùng khác.
 
 Thành viên:
-* [ ] **1412256** Võ Tiến Khoa (tên tài khoản github: 1412256)
-* [ ] **1412393** Đào Văn Phong (tên tài khoản github: 1412393)
+* [x] **1412256** Võ Tiến Khoa (tên tài khoản github: 1412256)
+* [x] **1412393** Đào Văn Phong (tên tài khoản github: 1412393)
 
 URL: **URL hosting của bài tập**
 
