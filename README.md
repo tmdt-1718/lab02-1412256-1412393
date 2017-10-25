@@ -44,7 +44,7 @@ Liệt kê các **yêu cầu nâng cao** đã thực hiện:
 
 ## Demo
 
-Link ảnh GIF demo ứng dụng:
+Link video demo ứng dụng: https://drive.google.com/open?id=0B3WisDJC5C3vcDBYLTQxaXJaNFU
 
 ![Video Walkthrough](demo.gif)
 
