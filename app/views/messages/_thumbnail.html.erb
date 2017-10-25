@@ -7,7 +7,7 @@
 								<%= a.title %>
 								<% end %>
 							</h4>
-							<h6 class="card-subtitle mb-2 text-muted">(<%= a.created_at %>)</h6>
+							<h6 class="card-subtitle mb-2 text-muted">(<%= a.created_at.to_formatted_s(:long) %>)</h6>
 							<h6 class="card-subtitle mb-2 text-muted">From: <%= a.user.name %> (<%= a.user.email %>)</h6>
 						<p class="card-text">
 							<%= truncate(a.body) %>

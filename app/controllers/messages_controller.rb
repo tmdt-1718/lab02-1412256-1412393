@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
         add_breadcrumb @message.title, show_path(@message.id)
         if (@message.seen==false && @message.user_id!=session[:current_user_id])
           @message.seen=true
-          @message.seen_at=Time.now
+          @message.seen_at=Time.now + 7.hours
           @message.save
         end
         # @message = Message.find(params[:id])
@@ -37,17 +37,18 @@ class MessagesController < ApplicationController
     def show2
         add_breadcrumb "Sent messages", "/messages/sentmessages"
         add_breadcrumb @message.title, show2_path(@message.id)
-        # @message = Message.find(params[:id])
-        #@message.update(view: @message.view+1)
-        #@message.save
+        @check=@message.seen;
     end
 
     def create
       if (!params[:post][:title].strip.empty? && !params[:post][:body].strip.empty? && params[:post][:friend_id])
         @message = Message.new(title: params[:post][:title],  body: params[:post][:body], user_id: session[:current_user_id], receiver: params[:post][:friend_id], seen: false)
         if @message.save
-           flash[:success] = "Send successfully."
-           redirect_to sentmessage_path
+          @message.created_at += 7.hours;
+            if @message.save
+               flash[:success] = "Send successfully."
+               redirect_to sentmessage_path
+             end
         end
       end
     end
