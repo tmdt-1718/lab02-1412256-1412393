@@ -6,7 +6,7 @@ Thành viên:
 * [x] **1412256** Võ Tiến Khoa (tên tài khoản github: 1412256)
 * [x] **1412393** Đào Văn Phong (tên tài khoản github: 1412393)
 
-URL: **URL hosting của bài tập**
+URL: **https://arcane-forest-97277.herokuapp.com/**
 
 ## Yêu cầu
 
