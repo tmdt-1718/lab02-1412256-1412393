@@ -39,7 +39,7 @@ class UsersController < ApplicationController
           @check=false
         end
         @check2=false;
-        @friend = @cur_user.friendships.find_by(friend_email: @user.email)
+        @friend = @user.friendships.find_by(friend_email: @cur_user.email)
         if (@friend)
           if (@friend.block == true)
             @check2=true;
@@ -113,7 +113,7 @@ class UsersController < ApplicationController
     def block
         @cur_user = User.find_by(id: session[:current_user_id])
         @user = User.find_by(id: params[:post][:friend_id])
-        @friend = @cur_user.friendships.find_by(friend_id: @user.id)
+        @friend = @user.friendships.find_by(friend_id: @cur_user.id)
         @friend.update(block: true);
         if @friend.save
           flash[:success] = "Block successfully."
@@ -125,7 +125,7 @@ class UsersController < ApplicationController
     def unblock
         @cur_user = User.find_by(id: session[:current_user_id])
         @user = User.find_by(id: params[:post][:friend_id])
-        @friend = @cur_user.friendships.find_by(friend_id: @user.id)
+        @friend = @user.friendships.find_by(friend_id: @cur_user.id)
         @friend.update(block: false);
         if @friend.save
           flash[:success] = "Unblock successfully."
