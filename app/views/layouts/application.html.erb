@@ -27,8 +27,7 @@
                  </a>
                </li>
                 <li class="nav-item">
-                  <%= link_to logout_path, remote: true, method: :delete, class: "nav-link" do%>Logout
-                  <%end%>
+                  <%= link_to "Logout",logout_path, method: :delete, class: "nav-link" %>
                 </li>
               <% else %>
                 <li class="nav-item "">

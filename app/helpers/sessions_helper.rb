@@ -14,11 +14,11 @@ module SessionsHelper
 
 	def authenticate
         if session[:current_user_id].nil?
-        redirect_to login_path
-    end
-  end
+        	redirect_to login_path
+    	end
+  	end
 
-  def login(user)
+  	def login(user)
 		session[:current_user_id] = user.id
 	end
 

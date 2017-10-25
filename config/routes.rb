@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  delete '/sessions/logout', to: 'sessions#destroy', as: :logout
   get '/messages/inbox/:id', to: 'messages#show', as: :show
   get '/messages/sentmessages/:id', to: 'messages#show2', as: :show2
   get '/messages/sentmessages', to: 'messages#sentmessage', as: :sentmessage
@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get '/users/requestlist', to: 'users#requestlist', as: :requestlist
   get '/sessions/login', to: 'sessions#new', as: :login
   post '/sessions/login', to: 'sessions#create', as: nil
-  delete '/sessions/logout', to: 'sessions#destroy', as: :logout
   resources :messages, only: [:index,:new, :create]
   resources :users, only: [:index, :show, :new, :create]
   post '/users/addfriend', to: 'users#addfriend'
